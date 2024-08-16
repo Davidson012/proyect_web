@@ -1,10 +1,10 @@
 //require("dotenv").config();
 
-import dotenv from 'dotenv';
-import mysql from 'mysql2';
+import dotenv from "dotenv";
+import mysql from "mysql2";
 
 // Cargar configuración del archivo .env
-dotenv.config({ path: './src/env/.env' });
+dotenv.config({ path: "./src/env/.env" });
 
 // Crea la conexión a la base de datos
 const connection = mysql.createConnection({
@@ -18,11 +18,11 @@ const connection = mysql.createConnection({
 // Conecta a la base de datos
 connection.connect((err) => {
   if (err) {
-    console.error('Error de conexión a la base de datos:', err.stack);
+    console.error("Error de conexión a la base de datos:", err.stack);
     return;
   }
   console.log(
-    'Conexión exitosa a la base de datos con ID:',
+    "Conexión exitosa a la base de datos con ID:",
     connection.threadId
   );
 });

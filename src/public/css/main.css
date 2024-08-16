@@ -1,142 +1,154 @@
-.hero-section {
-    background-size: cover;
-    background-position: center;
-    color: white;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .hero-text {
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 80%; /* Optional: Adjust width if needed */
-    margin-top: 50vh; /* Moves the text block down from the top */
-  }
-  
-  .hero-text h1 {
-    /* font-size: 2.5rem;Adjust size if needed */
-    font-weight: bold; /* Make the title bold */
-    font-family: TiemposHeadlineWeb-Bold, Georgia, serif;
-    font-size: 2.46153846rem;
-    font-weight: 400;
-    margin: 0 0 10px;
-  }
-  
-  .hero-text p {
-    font-size: 1.25rem; /* Adjust size if needed */
-    font-weight: bold; /* Make the paragraph text bold */
-    margin: 0.5rem 0; /* Space between lines */
-  }
-  
-  .form-container {
+.form-wrapper {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 16px;
+  padding: 70px;
+  width: 500px;
+  transform: translate(-50%, -50%);
+  background: hsl(219, 32%, 10%);
+  z-index: 12;
+}
+
+.hidden {
+  display: none;
+}
+
+.form-wrapper h2 {
+  color: #fff;
+  font-size: 2rem;
+}
+.form-wrapper form {
+  margin: 25px 0 65px;
+}
+form .form-control {
+  height: 50px;
+  position: relative;
+  margin-bottom: 16px;
+  background: hsl(219, 32%, 10%);
+  border: none;
+}
+.form-control input {
+  height: 100%;
+  width: 100%;
+  background: hsl(219, 32%, 10%);
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  border-radius: 4px;
+  color: hsl(0, 100%, 99%);
+  font-size: 1rem;
+  padding: 0 20px;
+}
+.form-control input:is(:focus, :valid) {
+  background: hsla(218, 39%, 14%, 0.8);
+  padding: 16px 20px 0;
+}
+
+.form-control label {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  pointer-events: none;
+  color: #ffffff;
+  transition: all 0.1s ease;
+}
+.form-control input:is(:focus, :valid) ~ label {
+  font-size: 0.75rem;
+  transform: translateY(-130%);
+}
+form .btn-lr {
+  width: 100%;
+  padding: 20px 50px;
+  background: hsl(218, 39%, 14%);
+  color: #fff;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  margin: 20px 0 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.1s ease;
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-5);
+}
+form .btn-lr:hover {
+  background: hsl(214, 84%, 56%);
+}
+.form-wrapper a {
+  text-decoration: none;
+}
+.form-wrapper a:hover {
+  text-decoration: underline;
+}
+.form-wrapper :where(label, p, small, a) {
+  color: #b3b3b3;
+}
+form .form-help {
+  display: flex;
+  justify-content: space-between;
+}
+form .remember-me {
+  display: flex;
+}
+form .remember-me input {
+  margin-right: 5px;
+  accent-color: #b3b3b3;
+}
+form .form-help :where(label, a) {
+  font-size: 0.9rem;
+}
+.form-wrapper p a {
+  color: #fff;
+}
+
+@media (max-width: 740px) {
+  body::before {
     display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1050;
-    background: white;
+  }
+  nav,
+  .form-wrapper {
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    max-width: 425px;
-    max-height: 549px;
+  }
+  nav a img {
+    width: 140px;
+  }
+  .form-wrapper {
     width: 100%;
+    top: 43%;
   }
-  .close-btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: none;
-    font-size: 1.5rem;
+  .form-wrapper form {
+    margin: 25px 0 40px;
   }
-  .form-content {
-    text-align: center;
-  }
-  .form-content label {
-    display: block;
-    text-align: left;
-  }
-  
-  .bd-placeholder-img {
-    font-size: 1.125rem;
-    text-anchor: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-  }
-  
-  @media (min-width: 768px) {
-    .bd-placeholder-img-lg {
-      font-size: 3.5rem;
-    }
-  }
-  
-  .b-example-divider {
-    width: 100%;
-    height: 3rem;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: solid rgba(0, 0, 0, 0.15);
-    border-width: 1px 0;
-    box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
-      inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
-  }
-  
-  .b-example-vr {
-    flex-shrink: 0;
-    width: 1.5rem;
-    height: 100vh;
-  }
-  
-  .bi {
-    vertical-align: -0.125em;
-    fill: currentColor;
-  }
-  
-  .nav-scroller {
-    position: relative;
-    z-index: 2;
-    height: 2.75rem;
-    overflow-y: hidden;
-  }
-  
-  .nav-scroller .nav {
-    display: flex;
-    flex-wrap: nowrap;
-    padding-bottom: 1rem;
-    margin-top: -1px;
-    overflow-x: auto;
-    text-align: center;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .btn-bd-primary {
-    --bd-violet-bg: #712cf9;
-    --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
-  
-    --bs-btn-font-weight: 600;
-    --bs-btn-color: var(--bs-white);
-    --bs-btn-bg: var(--bd-violet-bg);
-    --bs-btn-border-color: var(--bd-violet-bg);
-    --bs-btn-hover-color: var(--bs-white);
-    --bs-btn-hover-bg: #6528e0;
-    --bs-btn-hover-border-color: #6528e0;
-    --bs-btn-focus-shadow-rgb: var(--bd-violet-rgb);
-    --bs-btn-active-color: var(--bs-btn-hover-color);
-    --bs-btn-active-bg: #5a23c8;
-    --bs-btn-active-border-color: #5a23c8;
-  }
-  
-  .bd-mode-toggle {
-    z-index: 1500;
-  }
-  
-  .bd-mode-toggle .dropdown-menu .active .bi {
-    display: block !important;
-  }
-  
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+  border: none;
+  background: hsl(219, 32%, 10%);
+}
+.close:hover ion-icon {
+  color: hsl(214, 84%, 56%);
+}
+
+.error-message {
+  color: #ff0000; /* Rojo o el color que prefieras */
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: none; /* Ocultar por defecto */
+}
+
+.form-control.error input {
+  border-color: #ff0000; /* Rojo o el color que prefieras */
+}
+
+.form-control.error .error-message {
+  display: block;
+}

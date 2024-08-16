@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie_App</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/css/m.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <style>
+      .profile-edit-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+
+        border-radius: 10px;
+        background-color: hsl(222, 25%, 10%);
+      }
+
+      .profile-image {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-image img {
+        border-radius: 50%;
+        border: 4px solid hsl(214, 84%, 56%);
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 0 auto;
+        padding: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      /* .btn-save {
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 20px;
+      } */
+
+      .btn-save {
+        background: var(--oxford-blue);
+        display: block;
+        padding: 20px 50px;
+        margin-inline: auto;
+        margin-block: 40px 60px;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-5);
+        border-radius: 15px;
+        color: var(--white);
+      }
+
+      .btn-save:hover {
+        background: var(--light-azure);
+      }
+
+      .btn-saveg::before {
+        display: block;
+      }
+
+      .form-group input {
+        border-bottom: 3px solid white;
+      }
+    </style>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- #Header-->
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item dropdown me-5">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  id="usernameLink"
+                >
+                  Username
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Home</a></li>
+                  <li><a class="dropdown-item" href="#">Profile</a></li>
+                  <li><a class="dropdown-item" href="#">Films</a></li>
+                  <li><a class="dropdown-item" href="#">Reviews</a></li>
+                  <li><a class="dropdown-item" href="#">Watchlist</a></li>
+                  <li><a class="dropdown-item" href="#">List</a></li>
+                  <li><a class="dropdown-item" href="#">Likes</a></li>
+                  <li><div class="dropdown-divider"></div></li>
+                  <li><a class="dropdown-item" href="#">Settings</a></li>
+                  <li>
+                    <a class="dropdown-item" href="#" data-actio="logout"
+                      >Sign Out</a
+                    >
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item me-5">
+                <a class="nav-link" href="#">Films</a>
+              </li>
+              <li class="nav-item me-5">
+                <a class="nav-link" href="#">Lists</a>
+              </li>
+            </ul>
+
+            <div class="navbar-actions ms-auto d-flex">
+              <form action="#" class="navbar-form">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="I'm looking for..."
+                  class="navbar-form-search"
+                />
+                <button class="navbar-form-btn">
+                  <ion-icon name="search-outline"></ion-icon>
+                </button>
+                <button class="navbar-form-close">
+                  <ion-icon name="close-circle-outline"></ion-icon>
+                </button>
+              </form>
+              <button class="navbar-search-btn">
+                <ion-icon name="search-outline"></ion-icon>
+              </button>
+              <a href="#" id="logoutLink" class="navbar-signin">
+                <span>Sign Out</span>
+                <ion-icon name="log-in-outline"></ion-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <form
+      id="logoutForm"
+      action="/auth/logout"
+      method="POST"
+      style="display: none"
+    >
+      <!-- Puedes incluir un token CSRF aquí si es necesario -->
+    </form>
+
+    <!--#Main-->
+
+    <main>
+      <article class="container-j">
+        <section>
+          <div class="profile-edit-container">
+            <h2 class="text-center">Profile</h2>
+
+            <form
+              action="/auth/update-profile"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="profile-image">
+                <img
+                  src="https://a.ltrbxd.com/resized/avatar/upload/7/5/3/0/4/7/8/shard/avtr-0-220-0-220-crop.jpg?v=a0fd4fd3cf"
+                  alt="Profile Image"
+                  id="profileImage"
+                />
+                <div class="form-group mt-2">
+                  <!-- Input de archivo oculto -->
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    id="profileImage1"
+                    style="display: none"
+                    name="profileImage"
+                  />
+                  <!-- Botón que reemplaza el input -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    id="uploadButton"
+                  >
+                    Change Profile Picture
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  style="border-bottom: 2px solid white"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password">New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-save">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </section>
+      </article>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="/js/get-username.js"></script>
+    <script>
+      document
+        .getElementById("uploadButton")
+        .addEventListener("click", function () {
+          document.getElementById("profileImage1").click();
+        });
+    </script>
+  </body>
+</html>
