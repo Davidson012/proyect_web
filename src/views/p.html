@@ -1,231 +1,503 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <title>Movie_App</title>
+
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
     />
-    <title>Detalle de alimentos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+
     <style>
-      .img-item {
-        width: 100%;
-        height: auto;
-        max-width: 200px;
-        object-fit: cover;
+      /* Estilos de .form-wrapper */
+      .form-wrapper {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 16px;
+        padding: 70px;
+        width: 500px;
+        transform: translate(-50%, -50%);
+        background: hsl(219, 32%, 10%);
+        z-index: 12;
       }
 
-      .carrito {
-        position: fixed;
-        top: 0;
-        right: -350px;
-        width: 350px;
+      .hidden {
+        display: none;
+      }
+
+      .form-wrapper h2 {
+        color: #fff;
+        font-size: 2rem;
+      }
+
+      .form-wrapper form {
+        margin: 25px 0 65px;
+      }
+
+      .form-wrapper .form-control {
+        height: 50px;
+        position: relative;
+        margin-bottom: 16px;
+        background: hsl(219, 32%, 10%);
+        border: none;
+      }
+
+      .form-control input {
         height: 100%;
-        background-color: white;
-        box-shadow: -5px 0 5px rgba(0, 0, 0, 0.2);
-        transition: right 0.3s ease;
+        width: 100%;
+        background: hsl(219, 32%, 10%);
+        border: none;
+        border-bottom: 2px solid #fff;
+        outline: none;
+        border-radius: 4px;
+        color: hsl(0, 100%, 99%);
+        font-size: 1rem;
+        padding: 0 20px;
+      }
+
+      .form-control input:is(:focus, :valid) {
+        background: hsla(218, 39%, 14%, 0.8);
+        padding: 16px 20px 0;
+      }
+
+      .form-control label {
+        position: absolute;
+        left: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1rem;
+        pointer-events: none;
+        color: #ffffff;
+        transition: all 0.1s ease;
+      }
+
+      .form-control input:is(:focus, :valid) ~ label {
+        font-size: 0.75rem;
+        transform: translateY(-130%);
+      }
+
+      .form-wrapper form .btn-lr {
+        width: 100%;
+        padding: 20px 50px;
+        background: hsl(218, 39%, 14%);
+        color: #fff;
+        border-radius: 12px;
+        border: none;
+        outline: none;
+        margin: 20px 0 10px;
+        text-align: center;
+        cursor: pointer;
+        transition: 0.1s ease;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-5);
+      }
+
+      .form-wrapper form .btn-lr:hover {
+        background: hsl(214, 84%, 56%);
+      }
+
+      .form-wrapper a {
+        text-decoration: none;
+      }
+
+      .form-wrapper a:hover {
+        text-decoration: underline;
+      }
+
+      .form-wrapper :where(label, p, small, a) {
+        color: #b3b3b3;
+      }
+
+      .form-wrapper form .form-help {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .form-wrapper form .remember-me {
+        display: flex;
+      }
+
+      .form-wrapper form .remember-me input {
+        margin-right: 5px;
+        accent-color: #b3b3b3;
+      }
+
+      .form-wrapper form .form-help :where(label, a) {
+        font-size: 0.9rem;
+      }
+
+      .form-wrapper p a {
+        color: #fff;
+      }
+
+      @media (max-width: 740px) {
+        body::before {
+          display: none;
+        }
+        nav,
+        .form-wrapper {
+          padding: 20px;
+        }
+        nav a img {
+          width: 140px;
+        }
+        .form-wrapper {
+          width: 100%;
+          top: 43%;
+        }
+        .form-wrapper form {
+          margin: 25px 0 40px;
+        }
+      }
+
+      .close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+        color: white;
+        cursor: pointer;
+        border: none;
+        background: hsl(219, 32%, 10%);
+      }
+
+      .close:hover ion-icon {
+        color: hsl(214, 84%, 56%);
+      }
+
+      .error-message {
+        color: #ff0000; /* Rojo o el color que prefieras */
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        display: none; /* Ocultar por defecto */
+      }
+
+      .form-control.error input {
+        border-color: #ff0000; /* Rojo o el color que prefieras */
+      }
+
+      .form-control.error .error-message {
+        display: block;
+      }
+
+      /* Estilos adicionales para el perfil y navbar */
+      .profile-edit-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 10px;
+        background-color: hsl(222, 25%, 10%);
+      }
+
+      .profile-image {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-image img {
+        border-radius: 50%;
+        border: 4px solid hsl(214, 84%, 56%);
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin: 0 auto;
+        padding: 5px;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .btn-save {
+        background: var(--oxford-blue);
+        display: block;
+        padding: 20px 50px;
+        margin-inline: auto;
+        margin-block: 40px 60px;
+        font-size: var(--fs-sm);
+        font-weight: var(--fw-5);
+        border-radius: 15px;
+        color: var(--white);
+      }
+
+      .btn-save:hover {
+        background: var(--light-azure);
+      }
+
+      .btn-saveg::before {
+        display: block;
+      }
+
+      .form-group input {
+        border-bottom: 3px solid white;
+      }
+
+      .navbar-1 {
+        display: flex;
+        margin: 2 auto;
+        align-items: center;
+      }
+
+      .navbar-nav-1 {
+        display: flex;
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+
+      .nav-item {
+        position: relative;
+        margin-right: 2rem;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        color: #333;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link ion-icon {
+        margin-left: 0.5rem;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .nav-link:hover {
+        color: #007bff;
+      }
+
+      .nav-item:hover ion-icon {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        background-color: #fff;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        list-style: none;
+        padding: 0;
+        margin: 0;
         z-index: 1000;
       }
 
-      .carrito.show {
-        right: 0;
+      .dropdown-menu .dropdown-item {
+        padding: 0.5rem 1rem;
+        text-decoration: none;
+        display: block;
+        color: #333;
+        white-space: nowrap;
       }
 
-      .carrito-items {
-        overflow-y: auto;
-        height: 70%;
+      .dropdown-menu .dropdown-item:hover {
+        background-color: #007bff;
+        color: #fff;
       }
 
-      .btn-carrito {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1100;
+      .nav-item:hover .dropdown-menu {
+        display: block;
       }
     </style>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header class="bg-primary text-white text-center py-3">
-      <h1>TIENDA DE COMIDA</h1>
+    <!-- #Header-->
+    <header class="header">
+      <a href="/home/user" class="logo">
+        <img src="/images/logo.svg" alt="Movie Home" width="140" height="32" />
+      </a>
+
+      <nav class="navbar-1">
+        <ul class="navbar-nav-1">
+          <li class="nav-item dropdown">
+            <a href="#" class="nav-link">
+              Home
+              <ion-icon name="caret-down-circle-outline"></ion-icon>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="/home/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="#">Films</a></li>
+              <li><a class="dropdown-item" href="#">Reviews</a></li>
+              <li><a class="dropdown-item" href="#">Watchlist</a></li>
+              <li><a class="dropdown-item" href="#">List</a></li>
+              <li><a class="dropdown-item" href="#">Likes</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a href="#" class="nav-link">Films</a></li>
+          <li class="nav-item"><a href="#" class="nav-link">Lists</a></li>
+        </ul>
+      </nav>
+
+      <div class="search-box navbar-actions ms-auto d-flex" search-box>
+        <div class="navbar-form search-wrapper" search-wrapper>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search any Movies"
+            class="navbar-form-search search-field"
+            search-field
+            autocomplete="off"
+            aria-label="search movies"
+          />
+          <button class="navbar-form-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+          <button class="navbar-form-close" search-toggler>
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+        </div>
+        <a href="#" id="logoutLink" class="navbar-signin">
+          <span>Sign Out</span>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </a>
+      </div>
+      <button class="menu-btn" menu-btn menu-toggler>
+        <img
+          src="/images/menu.png"
+          width="24"
+          height="24"
+          alt="open menu"
+          class="menu"
+        />
+        <img
+          src="/images/menu-close.png"
+          width="24"
+          height="24"
+          alt="close menu"
+          class="close"
+        />
+      </button>
     </header>
+    <form
+      id="logoutForm"
+      action="/auth/logout"
+      method="POST"
+      style="display: none"
+    >
+      <!-- Puedes incluir un token CSRF aquí si es necesario -->
+    </form>
 
-    <nav class="nav bg-light justify-content-center py-2">
-      <a class="nav-link" href="#guisos">Guisos</a>
-      <a class="nav-link" href="#asados">Asados</a>
-      <a class="nav-link" href="#pastas">Pastas</a>
-      <a class="nav-link" href="#mariscos">Mariscos</a>
-      <a class="nav-link" href="#guarnicion">Guarnición</a>
-      <a class="nav-link" href="#bebidas">Bebidas</a>
-      <a class="nav-link" href="#postres">Postres</a>
-    </nav>
+    <!--#Main-->
+    <main>
+      <article class="container-j">
+        <section class="">
+          <div class="profile-edit-container">
+            <h2 class="text-center">Profile</h2>
 
-    <div class="container my-4">
-      <!-- Categoría: Guisos -->
-      <section id="guisos" class="mb-5">
-        <h3 class="text-primary">Guisos</h3>
-        <div class="row">
-          <!-- Aquí irán los productos de Guisos -->
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img
-                src="archivos/imagen1.jpg"
-                alt="Producto 1"
-                class="card-img-top img-item"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto 1</h5>
-                <p class="card-text">$10.000</p>
-                <button class="btn btn-primary agregar-carrito">
-                  Agregar al Carrito
-                </button>
+            <form
+              action="/auth/update-profile"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              <div class="profile-image">
+                <img
+                  src="https://a.ltrbxd.com/resized/avatar/upload/7/5/3/0/4/7/8/shard/avtr-0-220-0-220-crop.jpg?v=a0fd4fd3cf"
+                  alt="Profile Image"
+                  id="profileImage"
+                />
+                <div class="form-group mt-2">
+                  <!-- Input de archivo oculto -->
+                  <input
+                    type="file"
+                    class="form-control-file"
+                    id="profileImage1"
+                    style="display: none"
+                    name="profileImage"
+                  />
+                  <!-- Botón que reemplaza el input -->
+                  <button type="button" class="btn btn-save" id="uploadButton">
+                    Change Profile Picture
+                  </button>
+                </div>
               </div>
-            </div>
-          </div>
-          <!-- Repite para más productos -->
-        </div>
-      </section>
-
-      <!-- Categoría: Asados -->
-      <section id="asados" class="mb-5">
-        <h3 class="text-primary">Asados</h3>
-        <div class="row">
-          <!-- Aquí irán los productos de Asados -->
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img
-                src="archivos/imagen2.jpg"
-                alt="Producto 2"
-                class="card-img-top img-item"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto 2</h5>
-                <p class="card-text">$15.000</p>
-                <button class="btn btn-primary agregar-carrito">
-                  Agregar al Carrito
-                </button>
+              <div class="form-control">
+                <label for="username">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  style="border-bottom: 2px solid white"
+                />
               </div>
-            </div>
-          </div>
-          <!-- Repite para más productos -->
-        </div>
-      </section>
 
-      <!-- Categoría: Pastas -->
-      <section id="pastas" class="mb-5">
-        <h3 class="text-primary">Pastas</h3>
-        <div class="row">
-          <!-- Aquí irán los productos de Pastas -->
-          <div class="col-md-4 mb-3">
-            <div class="card">
-              <img
-                src="archivos/imagen3.jpg"
-                alt="Producto 3"
-                class="card-img-top img-item"
-              />
-              <div class="card-body">
-                <h5 class="card-title">Producto 3</h5>
-                <p class="card-text">$12.000</p>
-                <button class="btn btn-primary agregar-carrito">
-                  Agregar al Carrito
-                </button>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
               </div>
-            </div>
+
+              <div class="form-group">
+                <label for="password">New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="confirmPassword">Confirm New Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                />
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block btn-save">
+                Save Changes
+              </button>
+            </form>
           </div>
-          <!-- Repite para más productos -->
-        </div>
-      </section>
+        </section>
+      </article>
+    </main>
 
-      <!-- Agrega secciones para Mariscos, Guarnición, Bebidas, y Postres de manera similar -->
-    </div>
-
-    <button class="btn btn-primary btn-carrito">
-      <i class="fa fa-shopping-cart"></i> Carrito
-    </button>
-
-    <!-- Carrito de Compras -->
-    <div class="carrito" id="carrito">
-      <div class="header-carrito p-3 bg-primary text-white">
-        <h2>Tu Carrito</h2>
-        <button class="btn btn-close float-end"></button>
-      </div>
-      <div class="carrito-items p-3">
-        <!-- Aquí irán los items del carrito -->
-      </div>
-      <div class="carrito-total p-3 border-top">
-        <div class="d-flex justify-content-between">
-          <strong>Tu Total</strong>
-          <span class="carrito-precio-total">$0</span>
-        </div>
-        <button class="btn btn-success w-100 mt-3">
-          Pagar <i class="fa-solid fa-bag-shopping"></i>
-        </button>
-      </div>
-    </div>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="/js/get-username.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const carrito = document.getElementById("carrito");
-        const btnCarrito = document.querySelector(".btn-carrito");
-        const closeCarrito = document.querySelector(".btn-close");
-        const botonesAgregar = document.querySelectorAll(".agregar-carrito");
-        const carritoItems = document.querySelector(".carrito-items");
-        const carritoTotal = document.querySelector(".carrito-precio-total");
-
-        btnCarrito.addEventListener("click", () => {
-          carrito.classList.toggle("show");
+      document
+        .getElementById("uploadButton")
+        .addEventListener("click", function () {
+          document.getElementById("profileImage1").click();
         });
-
-        closeCarrito.addEventListener("click", () => {
-          carrito.classList.remove("show");
-        });
-
-        botonesAgregar.forEach((btn) => {
-          btn.addEventListener("click", agregarAlCarrito);
-        });
-
-        function agregarAlCarrito(e) {
-          const item = e.target.closest(".card");
-          const titulo = item.querySelector(".card-title").textContent;
-          const precio = item.querySelector(".card-text").textContent;
-          const imagenSrc = item.querySelector(".img-item").src;
-
-          const carritoItem = document.createElement("div");
-          carritoItem.classList.add("d-flex", "align-items-center", "mb-2");
-          carritoItem.innerHTML = `
-                    <img src="${imagenSrc}" alt="${titulo}" class="img-thumbnail" style="width: 50px; height: 50px;">
-                    <div class="ms-2">
-                        <h6 class="mb-0">${titulo}</h6>
-                        <span>${precio}</span>
-                    </div>
-                `;
-
-          carritoItems.appendChild(carritoItem);
-
-          actualizarTotal();
-        }
-
-        function actualizarTotal() {
-          let total = 0;
-          carritoItems.querySelectorAll("div").forEach((item) => {
-            const precio = parseFloat(
-              item
-                .querySelector("span")
-                .textContent.replace("$", "")
-                .replace(",", "")
-            );
-            total += precio;
-          });
-          carritoTotal.textContent = `$${total.toFixed(2)}`;
-        }
-      });
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

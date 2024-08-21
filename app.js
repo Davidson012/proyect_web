@@ -25,6 +25,7 @@ sessiones(app);
 //Rutas
 app.use("/", viewRoutes);
 app.use("/auth", authRoutes);
+app.use("/api", authRoutes);
 
 app.listen(port, () => {
   console.log(`Servidor escuchando en http://localhost:${port}`);

@@ -40,7 +40,7 @@
       .section-container {
         display: flex;
         justify-content: flex-end; /* Alinea el contenido a la derecha */
-        margin: -400px 12px 150px;
+        margin: -365px 15px 160px;
       }
 
       .form-container {
@@ -74,8 +74,54 @@
         transition: color 0.3s;
       }
 
-      .form-header button.active {
-        color: #39c0b3; /* Color al hacer clic */
+      .form-header button.active ion-icon {
+        color: #39c0b3; /* Color azul cuando está activo */
+      }
+      .btn-w.in-watchlist ion-icon {
+        color: hsl(
+          214,
+          84%,
+          56%
+        ); /* Cambia el color del ícono a azul cuando esté en la watchlist */
+      }
+
+      .btn-w ion-icon {
+        color: rgb(
+          255,
+          255,
+          255
+        ); /* Color predeterminado del ícono cuando no esté en la watchlist */
+      }
+      .btn-v.in-watched ion-icon {
+        color: hsl(
+          214,
+          84%,
+          56%
+        ); /* Cambia el color del ícono a azul cuando esté en la watchlist */
+      }
+
+      .btn-v ion-icon {
+        color: rgb(
+          255,
+          255,
+          255
+        ); /* Color predeterminado del ícono cuando no esté en la watchlist */
+      }
+
+      .btn-l.liked ion-icon {
+        color: hsl(
+          0,
+          100%,
+          50%
+        ); /* Cambia el color del ícono a azul cuando esté en la watchlist */
+      }
+
+      .btn-l ion-icon {
+        color: rgb(
+          255,
+          255,
+          255
+        ); /* Color predeterminado del ícono cuando no esté en la watchlist */
       }
 
       .form-buttons {
@@ -84,53 +130,195 @@
         margin-top: 10px;
       }
 
-      .form-buttons button {
-        background-color: #e0e0e0;
+      /* Estilo para el botón cuando la película está en favoritos (botón azul) */
+      .btn-add.in-favorites {
+        background-color: #007bff; /* Azul */
+        color: white;
         border: none;
-        padding: 10px;
+      }
+
+      /* Hover en rojo cuando la película está en favoritos y el mouse pasa por encima */
+      .btn-add.in-favorites:hover {
+        background-color: #ff0000; /* Rojo */
+        color: white;
+      }
+
+      /* Hover azul cuando el mouse pasa por encima si la película no está en favoritos */
+      .btn-add.not-in-favorites:hover {
+        background-color: #007bff; /* Azul */
+        color: white;
+      }
+
+      /* Estilo predeterminado cuando la película no está en favoritos */
+      .btn-add {
+        background-color: hsl(222, 25%, 10%);
+        border: 3px solid white;
+        padding: 15px;
         margin-bottom: 10px; /* Aumentado el margen */
         text-align: center;
         cursor: pointer;
-        border-radius: 5px; /* Agregado borde redondeado */
+        border-radius: 9px; /* Agregado borde redondeado */
         transition: background-color 0.3s;
       }
-
-      .form-buttons button:hover {
-        background-color: #ccc;
-      }
-
-      .ratings-section {
-        margin-top: 20px;
-        text-align: center;
-      }
-
-      .rating-text {
-        font-size: 18px;
-        color: #fff;
-        margin-bottom: 10px;
-      }
-
       ion-icon {
         font-size: 24px;
         color: #ffffff;
       }
 
-      /* Estilos para el formulario de calificación */
-      #form {
+      .comments-section {
+        padding: 20px;
+        margin-top: 20px;
+      }
+
+      .comment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        padding-top: 20px; /* Añade espacio para la línea divisoria */
+      }
+
+      .comment-form textarea {
         width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid #fff;
+        background: hsla(250, 13%, 11%, 0);
+        color: #fff;
+        font-size: 14px;
+      }
+
+      .comment-form .rating-stars {
+        display: flex;
+        gap: 5px;
+        justify-content: flex-start;
+        align-items: center;
+        margin-top: 10px; /* Añade margen superior para espacio */
+      }
+      .rs {
+        direction: rtl;
+      }
+
+      .comment-form .rating-stars label {
+        font-size: 24px;
+        color: grey;
+        cursor: pointer;
+      }
+
+      .comment-form .rating-stars input {
+        display: none;
+      }
+
+      .comment-form .rating-stars input:checked ~ label,
+      .comment-form .rating-stars label:hover,
+      .comment-form .rating-stars label:hover ~ label {
+        color: orange;
+      }
+
+      .comment-form .action-buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .comment-form button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: hsla(250, 13%, 11%, 0);
+        color: #fff;
+        border: none;
+        padding: 8px 16px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 4px;
+        position: absolute;
+        right: 0;
+        margin-top: 165px;
+      }
+
+      .comment-form button:hover {
+        background-color: hsl(214, 84%, 56%);
+      }
+
+      .comment-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        border-bottom: 2px solid white;
+        background-color: hsla(250, 13%, 11%, 0);
+        padding: 2px;
+        border-radius: 4px;
+      }
+
+      .comment-item img.profile-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+
+      .comment-item .username {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .comment-item .comment-rating {
+        color: orange;
+        margin-top: 5px;
+      }
+
+      .comment-section {
+        max-width: 500px;
+        margin: 0 auto;
         text-align: center;
       }
 
-      #form p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 24px; /* Aumentado tamaño de fuente */
-        margin: 0;
+      h2 {
+        font-size: 20px;
+        font-weight: normal;
+        margin-bottom: 10px;
       }
 
-      #form label {
-        font-size: 24px; /* Aumentado tamaño de fuente */
+      .divider {
+        border: 0;
+        border-top: 1px solid #ffffff;
+        margin-bottom: 20px;
+      }
+
+      #review-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #comment {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        border-bottom: 2px solid #ffffff;
+        background-color: transparent;
+        color: #ffffff;
+        resize: none;
+        margin-bottom: 10px;
+      }
+
+      .form-footer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .clasificacion {
+        display: inline-block;
+        font-size: 24px;
+        margin: 0;
+        direction: rtl;
+        unicode-bidi: bidi-override;
       }
 
       input[type="radio"] {
@@ -141,11 +329,6 @@
         color: grey;
       }
 
-      .clasificacion {
-        direction: rtl;
-        unicode-bidi: bidi-override;
-      }
-
       label:hover,
       label:hover ~ label {
         color: orange;
@@ -154,8 +337,70 @@
       input[type="radio"]:checked ~ label {
         color: orange;
       }
-    </style>
 
+      .submit-button {
+        padding: 5px 15px;
+        font-size: 16px;
+        color: #ffffff;
+        background-color: orange;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .submit-button:hover {
+        background-color: darkorange;
+      }
+
+      .review-container {
+        background-color: #1b1b1b;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 20px 0;
+        color: #ccc;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .review-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .review-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .review-header img {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
+
+      .review-header .username {
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .review-rating {
+        font-size: 24px;
+        margin-top: 10px;
+        color: hsl(214, 84%, 56%);
+      }
+
+      .review-content p {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #ddd;
+        margin-top: 10px;
+      }
+    </style>
     <!--Estilo de header-->
     <style>
       .navbar-1 {
@@ -233,11 +478,12 @@
 
     <script src="/js/global.js" defer></script>
     <script type="module" src="/js/details.js"></script>
+    <script src="/js/get-username.js"></script>
   </head>
   <body>
     <!-- #Header-->
     <header class="header">
-      <a href="/home" class="logo">
+      <a href="/home/user" class="logo">
         <img src="/images/logo.svg" alt="Movie Home" width="140" height="32" />
       </a>
 
@@ -249,7 +495,7 @@
               <ion-icon name="caret-down-circle-outline"></ion-icon>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="/home/profile">Profile</a></li>
               <li><a class="dropdown-item" href="#">Films</a></li>
               <li><a class="dropdown-item" href="#">Reviews</a></li>
               <li><a class="dropdown-item" href="#">Watchlist</a></li>
@@ -262,30 +508,32 @@
         </ul>
       </nav>
 
-      <div class="navbar-actions ms-auto d-flex">
-        <form action="#" class="navbar-form">
+      <div class="search-box navbar-actions ms-auto d-flex" search-box>
+        <div class="navbar-form search-wrapper" search-wrapper>
           <input
             type="text"
             name="search"
-            placeholder="I'm looking for..."
-            class="navbar-form-search"
+            placeholder="Search any Movies"
+            class="navbar-form-search search-field"
+            search-field
+            autocomplete="off"
+            aria-label="search movies"
           />
           <button class="navbar-form-btn">
             <ion-icon name="search-outline"></ion-icon>
           </button>
-          <button class="navbar-form-close">
+          <button class="navbar-form-close" search-toggler>
             <ion-icon name="close-circle-outline"></ion-icon>
           </button>
-        </form>
-        <button class="navbar-search-btn">
-          <ion-icon name="search-outline"></ion-icon>
-        </button>
-        <a href="#" id="loginLink" class="navbar-signin">
-          <span>Sign In</span>
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+        </div>
+        <a href="#" id="logoutLink" class="navbar-signin">
+          <span>Sign Out</span>
           <ion-icon name="log-in-outline"></ion-icon>
         </a>
       </div>
-
       <button class="menu-btn" menu-btn menu-toggler>
         <img
           src="/images/menu.png"
@@ -304,13 +552,20 @@
         />
       </button>
     </header>
+    <form
+      id="logoutForm"
+      action="/auth/logout"
+      method="POST"
+      style="display: none"
+    ></form>
 
-    <!-- #Sidebar-->
-    <nav class="sidebar" sidebar></nav>
-    <div class="overlay" overlay menu-toggler></div>
-
-    <!--#Main-->
     <main>
+      <!-- #Sidebar-->
+      <nav class="sidebar" sidebar></nav>
+      <div class="overlay" overlay menu-toggler></div>
+
+      <!--#Main-->
+
       <article class="container-j" page-content>
         <!-- <div class="movie-detail">
           <div
@@ -842,10 +1097,31 @@
 
         </section> -->
       </article>
+
+      <div id="search-result-modal" class="search-modal">
+        <p class="label">Results for</p>
+        <h1 class="heading" id="search-query"></h1>
+        <div class="movie-list">
+          <div class="grid-list" id="search-grid-list"></div>
+        </div>
+      </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+      document.querySelectorAll(".btn-h").forEach((button) => {
+        button.addEventListener("click", function () {
+          // Remover la clase 'active' de todos los botones
+          document
+            .querySelectorAll(".btn-h")
+            .forEach((btn) => btn.classList.remove("active"));
+
+          // Agregar la clase 'active' solo al botón clicado
+          this.classList.add("active");
+        });
+      });
+    </script>
   </body>
 </html>

@@ -14,7 +14,7 @@ const __dirname = dirname(__filename);
 
 // Ruta  principal
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "index.html"));
+  res.sendFile(path.join(__dirname, "..", "views", "home.html"));
 });
 
 // Ruta de recuperación de contraseña
@@ -46,23 +46,15 @@ router.get("/movies", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "movie_list.html"));
 });
 
-router.get("/films", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "films.html"));
-});
+// router.get("/films", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "views", "films.html"));
+// });
 
 router.get("/home/profile", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "profile.html"));
 });
 router.get("/home/profile/films", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "views", "p.html"));
-});
-
-router.get("/home/profile/watchlist", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "watchlist.html"));
-});
-
-router.get("/home/profile/likes", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "views", "like.html"));
 });
 
 router.get("/home/setting", (req, res) => {

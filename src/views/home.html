@@ -109,7 +109,7 @@
       }
     </style>
     <script src="/js/global.js" defer></script>
-    <script type="module" src="/js/index.js"></script>
+    <script type="module" src="/js/home_use.js"></script>
   </head>
   <body>
     <!-- #Header-->
@@ -220,17 +220,20 @@
         </ul>
       </nav>
 
-      <div class="navbar-actions ms-auto d-flex">
+      <!-- <div class="navbar-actions ms-auto d-flex">
         <form action="#" class="navbar-form">
-          <input
-            type="text"
-            name="search"
-            placeholder="I'm looking for..."
-            class="navbar-form-search"
-          />
-          <button class="navbar-form-btn">
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
+          <div class="search-wrapper">
+            <input
+              type="text"
+              name="search"
+              placeholder="I'm looking for..."
+              class="navbar-form-search"
+              search-field
+            />
+            <button class="navbar-form-btn">
+              <ion-icon name="search-outline"></ion-icon>
+            </button>
+          </div>
           <button class="navbar-form-close">
             <ion-icon name="close-circle-outline"></ion-icon>
           </button>
@@ -238,6 +241,34 @@
         <button class="navbar-search-btn">
           <ion-icon name="search-outline"></ion-icon>
         </button>
+        <a href="#" id="loginLink" class="navbar-signin">
+          <span>Sign In</span>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </a>
+      </div> -->
+
+      <div class="search-box navbar-actions ms-auto d-flex" search-box>
+        <div class="navbar-form search-wrapper" search-wrapper>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search any Movies"
+            class="navbar-form-search search-field"
+            search-field
+            autocomplete="off"
+            aria-label="search movies"
+          />
+          <button class="navbar-form-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+          <button class="navbar-form-close" search-toggler>
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+        </div>
+
         <a href="#" id="loginLink" class="navbar-signin">
           <span>Sign In</span>
           <ion-icon name="log-in-outline"></ion-icon>
@@ -262,13 +293,12 @@
         />
       </button>
     </header>
-
-    <!--#Main-->
-    <nav class="sidebar" sidebar></nav>
-
-    <div class="overlay" overlay menu-toggler></div>
-
     <main>
+      <!--#Main-->
+      <nav class="sidebar" sidebar></nav>
+
+      <div class="overlay" overlay menu-toggler></div>
+
       <article class="container-j" page-content>
         <!-- #Movie List-->
       </article>
@@ -370,6 +400,14 @@
           </p>
         </div>
       </section>
+
+      <div id="search-result-modal" class="search-modal">
+        <p class="label">Results for</p>
+        <h1 class="heading" id="search-query"></h1>
+        <div class="movie-list">
+          <div class="grid-list" id="search-grid-list"></div>
+        </div>
+      </div>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

@@ -2,7 +2,7 @@
 
 import { sidebar } from "./sidebar.js";
 import { api_key, imageBaseURL, fetchDataFromServer } from "./api.js";
-import { createMovieCard } from "./movie-card.js";
+import { createmoviecard } from "./movie_user.js";
 import { search } from "./search.js";
 
 const pageContent = document.querySelector("[page-content]");
@@ -103,7 +103,7 @@ const heroBanner = function ({ results: movieList }) {
       </div>
       <p class="genre">${genreList.asString(genre_ids)}</p>
       <p class="banner-text">${overview}</p>
-      <a href="/movie" class="btn" onclick= "getMovieDetail(${id})">
+      <a href="#" id="loginLink" class="btn" onclick= "getMovieDetail(${id})">
         <img
           src="/images/play_circle.png"
           width="24"
@@ -199,7 +199,7 @@ const createMovieList = function ({ results: movieList }, title) {
   `;
 
   for (const movie of movieList) {
-    const movieCard = createMovieCard(movie);
+    const movieCard = createmoviecard(movie);
 
     movieListElem.querySelector(".slider-inner").appendChild(movieCard);
   }

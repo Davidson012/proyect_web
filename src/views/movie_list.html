@@ -108,7 +108,15 @@
       .nav-item:hover .dropdown-menu {
         display: block;
       }
+
+      .search-wrapper {
+      }
+      .search-box {
+      }
     </style>
+
+    <script src="/js/movie_list.js" type="module"></script>
+    <script src="/js/global.js" defer></script>
   </head>
   <body>
     <!-- #Header-->
@@ -125,7 +133,7 @@
               <ion-icon name="caret-down-circle-outline"></ion-icon>
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" href="/home/profile">Profile</a></li>
               <li><a class="dropdown-item" href="#">Films</a></li>
               <li><a class="dropdown-item" href="#">Reviews</a></li>
               <li><a class="dropdown-item" href="#">Watchlist</a></li>
@@ -138,7 +146,7 @@
         </ul>
       </nav>
 
-      <div class="navbar-actions ms-auto d-flex">
+      <!-- <div class="navbar-actions ms-auto d-flex">
         <form action="#" class="navbar-form">
           <input
             type="text"
@@ -158,6 +166,34 @@
         </button>
         <a href="#" id="loginLink" class="navbar-signin">
           <span>Sign In</span>
+          <ion-icon name="log-in-outline"></ion-icon>
+        </a>
+      </div> -->
+
+      <div class="search-box navbar-actions ms-auto d-flex" search-box>
+        <div class="navbar-form search-wrapper" search-wrapper>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search any Movies"
+            class="navbar-form-search search-field"
+            search-field
+            autocomplete="off"
+            aria-label="search movies"
+          />
+          <button class="navbar-form-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+          <button class="navbar-form-close" search-toggler>
+            <ion-icon name="close-circle-outline"></ion-icon>
+          </button>
+          <button class="navbar-search-btn">
+            <ion-icon name="search-outline"></ion-icon>
+          </button>
+        </div>
+
+        <a href="#" id="logoutLink" class="navbar-signin">
+          <span>Sign Out</span>
           <ion-icon name="log-in-outline"></ion-icon>
         </a>
       </div>
@@ -180,18 +216,22 @@
         />
       </button>
     </header>
-
-    <nav class="sidebar" sidebar></nav>
-
-    <div class="overlay" overlay menu-toggler></div>
-
-    <!--#Main-->
-
+    <form
+      id="logoutForm"
+      action="/auth/logout"
+      method="POST"
+      style="display: none"
+    ></form>
     <main>
+      <nav class="sidebar" sidebar></nav>
+      <div class="overlay" overlay menu-toggler></div>
+
+      <!--#Main-->
+
       <article class="container-j" page-content>
         <!-- #Movie List-->
 
-        <section class="movie-list genre-list" aria-label="You May Also Like">
+        <!-- <section class="movie-list genre-list" aria-label="You May Also Like">
           <div class="title-wrapper">
             <h1 class="heading">You May Also Like</h1>
           </div>
@@ -227,342 +267,13 @@
               <a href="" class="card-btn" title="Puss in bottle"></a>
             </div>
 
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a href="" class="card-btn" title="Puss in bottle"></a>
-            </div>
           </div>
 
           <button class="btn load-more loading">Load More</button>
-        </section>
+        </section> -->
       </article>
-
-      <!-- <div class="search-modal active">
+      <!-- 
+      <div class="search-modal active">
         <p class="label">Results for</p>
 
         <h1 class="heading">Puss in Boots</h1>
@@ -598,321 +309,22 @@
 
               <a href="/movie" class="card-btn" title="Puss in bottle"></a>
             </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
-
-            <div class="movie-card">
-              <figure class="poster-box card-banner">
-                <img
-                  src="/images/slider-control.jpg"
-                  class="img-cover"
-                  alt=""
-                />
-              </figure>
-
-              <h4 class="title">Puss in Boots</h4>
-
-              <div class="meta-list">
-                <div class="meta-item">
-                  <img
-                    src="/images/star.png"
-                    width="20"
-                    height="20"
-                    loading="lazy"
-                    alt="rating"
-                  />
-
-                  <span class="span">8.5</span>
-                </div>
-
-                <div class="card-badge">2022</div>
-              </div>
-
-              <a
-                href="./detail.html"
-                class="card-btn"
-                title="Puss in bottle"
-              ></a>
-            </div>
           </div>
         </div>
       </div> -->
+
+      <div id="search-result-modal" class="search-modal">
+        <p class="label">Results for</p>
+        <h1 class="heading" id="search-query"></h1>
+        <div class="movie-list">
+          <div class="grid-list" id="search-grid-list"></div>
+        </div>
+      </div>
     </main>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="/js/movie_list.js" type="module"></script>
-    <script src="/js/global" defer></script>
+    <script src="/js/get-username.js"></script>
   </body>
 </html>
